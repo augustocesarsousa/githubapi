@@ -74,6 +74,8 @@
 
   .search-input {
     width: 300px;
+    text-align: left;
+    padding-left: 15px;
   }
 
 }

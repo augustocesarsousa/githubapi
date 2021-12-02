@@ -1,6 +1,8 @@
 import './styles.css';
 
 import ResultCard from '../../components/ResultCard';
+import ProfileLoader from './ProfileLoader';
+
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -17,9 +19,11 @@ type Profile = {
 };
 
 const ProfileSearch = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const [profile, setProfile] = useState<Profile>();
 
-  const [formData, setFomrData] = useState<FormData>({
+  const [formData, setFormData] = useState<FormData>({
     profile: '',
   });
 
@@ -27,17 +31,21 @@ const ProfileSearch = () => {
     const name = event.target.name;
     const value = event.target.value;
 
-    setFomrData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    setIsLoading(true);
     axios
       .get(`https://api.github.com/users/${formData.profile}`)
       .then((response) => {
         setProfile(response.data);
         console.log(response.data);
+      })
+      .finally(() => {
+        setIsLoading(false);
       })
       .catch((error) => {
         setProfile(undefined);
@@ -53,7 +61,7 @@ const ProfileSearch = () => {
           <div className="form-container">
             <input
               type="text"
-              name="profile-input"
+              name="profile"
               value={formData.profile}
               className="search-input"
               placeholder="Usuário Github"
@@ -65,7 +73,18 @@ const ProfileSearch = () => {
           </div>
         </form>
       </div>
-      <ResultCard />
+      {profile &&
+        (isLoading ? (
+          <ProfileLoader />
+        ) : (
+          <ResultCard
+            avatarUrl={profile.avatar_url}
+            htmlUrl={profile.html_url}
+            followers={profile.followers}
+            location={profile.location}
+            name={profile.name}
+          />
+        ))}
     </div>
   );
 };
