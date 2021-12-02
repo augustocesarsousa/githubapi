@@ -1,5 +1,5 @@
 .main-nav {
-  padding-left: 30px;
+  padding: 0 30px;
   min-height: 62px;
 }
 
@@ -8,13 +8,18 @@
   color: #fff;
 }
 
+.main-nav p {
+  color: #585c61;
+  font-size: 12px;
+}
+
 .nav-logo-text h4:hover {
   color: #8d9399;
 }
 
 @media (min-width: 576px) {
   .main-nav {
-    padding-left: 40px;
+    padding: 0 40px;
     min-height: 62px;
   }
 }

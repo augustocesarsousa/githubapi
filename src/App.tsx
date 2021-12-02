@@ -1,13 +1,13 @@
 import './assets/styles/custom.scss';
 import './App.css';
 import Navbar from './components/Navbar';
-import ResultCard from './components/ResultCard';
+import ProfileSearch from './pages/ProfileSearch';
 
 function App() {
   return (
   <>
   <Navbar />
-  <ResultCard />;
+  <ProfileSearch />;
   </>);
 }
 
