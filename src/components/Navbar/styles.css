@@ -1,5 +1,5 @@
 .main-nav {
-  padding-left: 40px;
+  padding-left: 30px;
   min-height: 62px;
 }
 
@@ -9,5 +9,12 @@
 }
 
 .nav-logo-text h4:hover {
-  color: #8D9399;
+  color: #8d9399;
+}
+
+@media (min-width: 576px) {
+  .main-nav {
+    padding-left: 40px;
+    min-height: 62px;
+  }
 }
